@@ -1,10 +1,10 @@
 package com.materi.java.config;
 
 
+import com.materi.java.service.UserDetailService;
 import com.materi.java.security.AccessDenied;
 import com.materi.java.security.AuthEntryPointJwt;
 import com.materi.java.security.AuthTokenFilter;
-import com.materi.java.service.UserDetailService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -54,6 +54,10 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
             // API controller
             "/api/user/login",
             "/api/user/register",
+            "/api/user/**",
+            "/api/barang/**",
+            "/api/**"
+
     };
 
 

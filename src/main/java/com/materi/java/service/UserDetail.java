@@ -1,7 +1,6 @@
 package com.materi.java.service;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-
 import com.materi.java.model.User;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;

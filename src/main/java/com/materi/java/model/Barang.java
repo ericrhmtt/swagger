@@ -4,29 +4,41 @@ import javax.persistence.*;
 import java.util.Date;
 
 @Entity
-@Table(name = "Barang")
 public class Barang {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "Nama_Barang")
-    private String Nama_Barang;
+    @Column(nullable = false)
+    private String namaBarang;
 
-    @Column(name = "stok_barang")
-    private Long stok_barang;
+    @Column(nullable = false)
+    private Integer stokBarang;
 
-    @Column(name = "deskripsi_barang")
-    private String deskripsi_barang;
+    @Column
+    private String deskripsiBarang;
 
-    @Column(name = "jenis_barang")
-    private String jenis_barang;
+    @Column
+    private String jenisBarang;
 
-    @Column(name = "Tanggal_Kadaluarsa")
-    private Date Tanggal_Kadaluarsa;
+    @Column
+    private Date tanggalKadaluarsa;
 
-    @Column(name = "harga_barang")
-    private Float harga_barang;
+    @Column(nullable = false)
+    private Float hargaBarang;
+
+    public Barang() {}
+
+    public Barang(String namaBarang, Integer stokBarang, String deskripsiBarang, String jenisBarang, Date tanggalKadaluarsa, Float hargaBarang) {
+        this.namaBarang = namaBarang;
+        this.stokBarang = stokBarang;
+        this.deskripsiBarang = deskripsiBarang;
+        this.jenisBarang = jenisBarang;
+        this.tanggalKadaluarsa = tanggalKadaluarsa;
+        this.hargaBarang = hargaBarang;
+    }
+
 
     public Long getId() {
         return id;
@@ -36,51 +48,51 @@ public class Barang {
         this.id = id;
     }
 
-    public String getNama_Barang() {
-        return Nama_Barang;
+    public String getNamaBarang() {
+        return namaBarang;
     }
 
-    public void setNama_Barang(String nama_Barang) {
-        Nama_Barang = nama_Barang;
+    public void setNamaBarang(String namaBarang) {
+        this.namaBarang = namaBarang;
     }
 
-    public Long getStok_barang() {
-        return stok_barang;
+    public Integer getStokBarang() {
+        return stokBarang;
     }
 
-    public void setStok_barang(Long stok_barang) {
-        this.stok_barang = stok_barang;
+    public void setStokBarang(Integer stokBarang) {
+        this.stokBarang = stokBarang;
     }
 
-    public String getDeskripsi_barang() {
-        return deskripsi_barang;
+    public String getDeskripsiBarang() {
+        return deskripsiBarang;
     }
 
-    public void setDeskripsi_barang(String deskripsi_barang) {
-        this.deskripsi_barang = deskripsi_barang;
+    public void setDeskripsiBarang(String deskripsiBarang) {
+        this.deskripsiBarang = deskripsiBarang;
     }
 
-    public String getJenis_barang() {
-        return jenis_barang;
+    public String getJenisBarang() {
+        return jenisBarang;
     }
 
-    public void setJenis_barang(String jenis_barang) {
-        this.jenis_barang = jenis_barang;
+    public void setJenisBarang(String jenisBarang) {
+        this.jenisBarang = jenisBarang;
     }
 
-    public Date getTanggal_Kadaluarsa() {
-        return Tanggal_Kadaluarsa;
+    public Date getTanggalKadaluarsa() {
+        return tanggalKadaluarsa;
     }
 
-    public void setTanggal_Kadaluarsa(Date tanggal_Kadaluarsa) {
-        Tanggal_Kadaluarsa = tanggal_Kadaluarsa;
+    public void setTanggalKadaluarsa(Date tanggalKadaluarsa) {
+        this.tanggalKadaluarsa = tanggalKadaluarsa;
     }
 
-    public Float getHarga_barang() {
-        return harga_barang;
+    public Float getHargaBarang() {
+        return hargaBarang;
     }
 
-    public void setHarga_barang(Float harga_barang) {
-        this.harga_barang = harga_barang;
+    public void setHargaBarang(Float hargaBarang) {
+        this.hargaBarang = hargaBarang;
     }
 }

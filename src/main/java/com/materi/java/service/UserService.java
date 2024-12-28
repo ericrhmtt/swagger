@@ -1,10 +1,9 @@
 package com.materi.java.service;
 
-
 import com.materi.java.exception.NotFoundException;
+import com.materi.java.repository.UserRepository;
 import com.materi.java.model.LoginRequest;
 import com.materi.java.model.User;
-import com.materi.java.repository.UserRepository;
 import com.materi.java.security.JwtUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -21,7 +20,7 @@ import java.util.Map;
 @Service
 public class UserService {
     @Autowired
-    UserRepository akunRepository;
+    UserRepository userRepository;
 
     @Autowired
     private JwtUtils jwtUtils;
@@ -34,13 +33,13 @@ public class UserService {
 
 
     public Map<Object, Object> login(LoginRequest loginRequest) {
-        User user = akunRepository.findByEmail(loginRequest.getEmail()).orElseThrow(() -> new RuntimeException("Username not found"));
+        User user = userRepository.findByEmail(loginRequest.getEmail()).orElseThrow(() -> new RuntimeException("Username not found"));
         if (encoder.matches(loginRequest.getPassword(), user.getPassword())) {
             Authentication authentication = authenticationManager.authenticate(
                     new UsernamePasswordAuthenticationToken(loginRequest.getEmail(), loginRequest.getPassword()));
             SecurityContextHolder.getContext().setAuthentication(authentication);
             String jwt = jwtUtils.generateToken(authentication);
-            akunRepository.save(user);
+            userRepository.save(user);
             Map<Object, Object> response = new HashMap<>();
             response.put("data", user);
             response.put("token", jwt);
@@ -51,27 +50,27 @@ public class UserService {
 
     public User add(User user) {
         user.setPassword(encoder.encode(user.getPassword()));
-        return akunRepository.save(user);
+        return userRepository.save(user);
     }
 
 
     public User get(Long id) {
-        return akunRepository.findById(id).orElseThrow(() -> new NotFoundException("Id Not Found"));
+        return userRepository.findById(id).orElseThrow(() -> new NotFoundException("Id Not Found"));
     }
 
     public List<User> getAll() {
-        return akunRepository.findAll();
+        return userRepository.findAll();
     }
 
     public User edit(Long id, User user) {
-        User update = akunRepository.findById(id).orElseThrow(() -> new NotFoundException("Id Not Found"));
+        User update = userRepository.findById(id).orElseThrow(() -> new NotFoundException("Id Not Found"));
         update.setPassword(user.getPassword());
         update.setUsername(user.getUsername());
-        return akunRepository.save(update);
+        return userRepository.save(update);
     }
     public Map<String, Boolean> delete(Long id) {
         try {
-            akunRepository.deleteById(id);
+            userRepository.deleteById(id);
             Map<String, Boolean> res = new HashMap<>();
             res.put("Deleted", Boolean.TRUE);
             return res;
